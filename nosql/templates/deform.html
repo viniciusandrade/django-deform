@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <!-- Remember those dependencies from above -->
+        {% for css in deform_dependencies.css %}
+            <link rel="stylesheet" href="{% static css %}" type="text/css"/>
+        {% endfor %}
+        {% for js in deform_dependencies.js %}
+            <script type="text/javascript" src="{% static  js %}"></script>
+        {% endfor %}
+    </head>
+    <body>
+        <!-- Make sure not to escape the HTML output by Deform -->
+        {{ form|safe }}        
+
+        <script type="text/javascript">
+            <!-- //Fix Deform's default enctype -->
+            $('form#deform').attr('enctype', 'application/x-www-form-urlencoded');
+        </script>   
+    </body>
+</html>
